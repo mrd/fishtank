@@ -23,12 +23,33 @@
 		h1 a { text-decoration: none }
 		h2 { font-size: 1.5em; color: #eeb101; }
     h3 { text-align: center; color: #eeb101; }
-    a { color: #eeb101; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; }
     .download { float: right; }
 		pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
+a {
+    text-decoration: none;
+    color: #eeb101;
+
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#imga {
+    float: left;
+    width: 330px;
+    margin: 1em;
+}
+
+#imgb {
+    float: right;
+    width: 330px;
+    margin: 1em;
+}
+
 	</style>
 	
 </head>
@@ -48,18 +69,25 @@
     <h1><a href="http://github.com/mrd/fishtank">fishtank</a>
       <span class="small">by <a href="http://github.com/mrd">mrd</a></span></h1>
 
-    <div class="description">
-      <img src="fishtank1.png" alt="fishtank1"/><img src="fishtank2.png" alt="fishtank2"/>
-      A demo written in Haskell using OpenGL that allows the user to
-      view a fish tank at various angles.  There are several kinds of
-      fish inside, showing various relationships based on the "Boids"
-      paper, including: flocking, predator/prey, mating, and feeding.
-      The user may use the mouse to alter the viewing angle, the
-      mousewheel to zoom, or may right-click to access a context menu
-      which offers options such as "Add Food" or "Kill a Boid".  There
-      is also an option for anaglyphic 3D output (using red-blue
-      glasses).
-    </div>
+      <div class="description">
+        <a href="fishtank1.png">
+          <img id="imga" src="fishtank1.png" width="320" height="240" alt="example1"/>
+        </a>
+        <a href="fishtank1.png">
+          <img id="imgb" src="fishtank2.png" width="320" height="240" alt="example2"/>
+        </a>
+        <p>
+          A demo written in Haskell using OpenGL that allows the user to
+          view a fish tank at various angles.  There are several kinds of
+          fish inside, showing various relationships based on the "Boids"
+          paper, including: flocking, predator/prey, mating, and feeding.
+          The user may use the mouse to alter the viewing angle, the
+          mousewheel to zoom, or may right-click to access a context menu
+          which offers options such as "Add Food" or "Kill a Boid".  There
+          is also an option for anaglyphic 3D output (using red-blue
+          glasses).
+        </p>
+      </div>
 
     <h2>Dependencies</h2>
 <p>ghc, hopengl including OpenGL, OpenGLRaw, GLU, and GLUT, libjpeg.</p>
