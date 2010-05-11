@@ -17,7 +17,7 @@ import Data.IORef ( IORef, newIORef )
 import System.Exit ( exitWith, ExitCode(ExitSuccess) )
 import Graphics.UI.GLUT
 import Control.Monad
-import qualified Quat as Q
+import qualified Data.Quaternion as Q
 import GLDouble
 import Util
 
@@ -42,7 +42,7 @@ data (Show a, Eq a, Ord a) =>
                 , pos       :: Vector3d
                 , vel       :: Vector3d
                 , speeds    :: Bounds
-                , quat      :: Q.Quat
+                , quat      :: Q.Quat GLdouble
                 , otherData :: a }
   deriving (Show, Eq, Ord)
 

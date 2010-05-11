@@ -11,7 +11,7 @@ import Graphics.UI.GLUT
 import Control.Monad
 import System.Random
 import Data.List ( foldl' )
-import qualified Quat as Q
+import qualified Data.Quaternion as Q
 import GLDouble
 import Boids
 import Util
@@ -130,7 +130,7 @@ display state = do
           vs <- get (viewingS state)
           translated (0, 0, (2.5+boundMaxZ) - (2.5+boundMaxZ)/vs)
           vq <- get (viewingQ state)
-          m  <- Q.toMatrix vq :: IO (GLmatrix GLdouble)
+          m  <- newMatrix ColumnMajor (Q.rowMajorElems vq) :: IO (GLmatrix GLdouble)
           multMatrix m
           position (Light 0) $= light0Position          
           vivariumDisplay state
@@ -164,7 +164,7 @@ testmodel n state = do
   clear [ ColorBuffer, DepthBuffer ]
   loadIdentity   -- clear the matrix
   vq <- get (viewingQ state)
-  m  <- Q.toMatrix vq :: IO (GLmatrix GLdouble)
+  m  <- newMatrix ColumnMajor (Q.rowMajorElems vq) :: IO (GLmatrix GLdouble)
   multMatrix m
   scaled (5, 5, 5)
   vs <- get (viewingS state)

@@ -13,24 +13,25 @@ import Util
 import Data.Maybe
 import Data.List ( lookup )
 import Control.Monad
-import qualified Quat as Q
+import qualified Data.Quaternion as Q
 
 type Triple = (GLdouble, GLdouble, GLdouble)
 
 data Hier a = H { hierDraw     :: IO ()
                 , hierTrans    :: Triple
-                , hierQuat     :: Q.Quat
+                , hierQuat     :: Q.Quat GLdouble
                 , hierData     :: a
                 , hierChildren :: [Hier a] }
 
-newtype Compiled a = C (DisplayList, IORef Triple, IORef Q.Quat, IORef a, [Compiled a])
+newtype Compiled a = 
+  C (DisplayList, IORef Triple, IORef (Q.Quat GLdouble), IORef a, [Compiled a])
 
 drawCompiled (C (dl, r_t, r_q, _, cs)) = 
   preservingMatrix $ do
     t <- get r_t
     q <- get r_q
     translated t
-    m <- Q.toMatrix q :: IO (GLmatrix GLdouble)
+    m <- newMatrix ColumnMajor (Q.rowMajorElems q) :: IO (GLmatrix GLdouble)
     multMatrix m
     callList dl
     mapM_ drawCompiled cs
@@ -44,7 +45,7 @@ drawModifiedCompiled changes (C (dl, r_t, r_q, r_x, cs)) =
     let q' = case lookup x changes of
                Just r  -> r `Q.mul` q
                Nothing -> q
-    m <- Q.toMatrix q' :: IO (GLmatrix GLdouble)
+    m <- newMatrix ColumnMajor (Q.rowMajorElems q') :: IO (GLmatrix GLdouble)
     multMatrix m
     callList dl
     mapM_ (drawModifiedCompiled changes) cs
@@ -54,7 +55,7 @@ drawCompiledPart a (C (dl, r_t, r_q, r_x, cs)) =
     t <- get r_t
     q <- get r_q
     translated t
-    m <- Q.toMatrix q :: IO (GLmatrix GLdouble)
+    m <- newMatrix ColumnMajor (Q.rowMajorElems q) :: IO (GLmatrix GLdouble)
     multMatrix m
     x <- get r_x
     if x == a then callList dl else return ()

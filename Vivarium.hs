@@ -8,7 +8,7 @@ import Data.IORef ( IORef, newIORef )
 import Graphics.UI.GLUT
 import Util
 import Boids
-import qualified Quat as Q
+import qualified Data.Quaternion as Q
 import Control.Monad
 import System.Random
 import Debug.Trace
@@ -408,7 +408,7 @@ data State = State { flockList :: [IORef (Flock BoidInfo)]
                    , tankDL    :: DisplayList
                    , curButton :: IORef (Maybe MouseButton)
                    , lastMPos  :: IORef Position
-                   , viewingQ  :: IORef Q.Quat
+                   , viewingQ  :: IORef (Q.Quat GLdouble)
                    , viewingS  :: IORef GLdouble
                    , anaglyph  :: IORef Bool
                    , verbose   :: IORef Bool
@@ -735,11 +735,14 @@ vivariumDisplay state = do
   forM_ (concat flocks) $ \ b -> 
     drawCompiledBoid (boidByNum (biFlock (otherData b)) state) b
 
+toMatrix :: Q.Quat GLdouble -> IO (GLmatrix GLdouble)
+toMatrix = newMatrix ColumnMajor . Q.rowMajorElems -- OpenGL uses column-major
+
 drawCompiledBoid c (B { i = i, pos = p, vel = v, quat = q, otherData = od }) = do
   preservingMatrix $ do
     translated' p
     -- let q = Q.lookAt (1, 0, 0) (vx, vy, vz) (0, 1, 0) where Vector3 vx vy vz = v
-    m <- Q.toMatrix q :: IO (GLmatrix GLdouble)
+    m <- toMatrix q
     multMatrix m
     scaled (biScale od, biScale od, biScale od)
     if (snd (biTailA od)) == 0 
@@ -753,7 +756,7 @@ drawCompiledBoidPart a c (B { i = i, pos = p, vel = v, quat = q, otherData = od 
   preservingMatrix $ do
     translated' p
     -- let q = Q.lookAt (1, 0, 0) (vx, vy, vz) (0, 1, 0) where Vector3 vx vy vz = v
-    m <- Q.toMatrix q :: IO (GLmatrix GLdouble)
+    m <- toMatrix q
     multMatrix m
     scaled (biScale od, biScale od, biScale od)
     drawCompiledPart (Just a) c
