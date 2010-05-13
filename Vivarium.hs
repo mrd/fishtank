@@ -15,7 +15,7 @@ import Debug.Trace
 import GLDouble
 import Hier
 import JpegTexture
-import Collision
+import Graphics.Collision.Cullide
 import Data.List
 
 --------------------------------------------------

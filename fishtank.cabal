@@ -4,7 +4,7 @@ License:	BSD3
 License-file:   LICENSE
 Author:		Matthew Danish <mrd@debian.org>
 Maintainer:	mrd@debian.org
-Build-Depends:	base, OpenGL, OpenGLRaw, GLUT, random, array, haskell-quaternion
+Build-Depends:	base, OpenGL, OpenGLRaw, GLUT, random, array, haskell-quaternion, hcullide
 Build-type:     Simple
 Synopsis:	An OpenGL-based demo showing a 3D fish tank with simple boid-like behaviors
 Description:
