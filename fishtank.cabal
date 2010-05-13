@@ -1,27 +1,28 @@
-Name:		Fishtank
-Version:	1.0
-License:	BSD3
+Name:           Fishtank
+Version:        1.0
+Category:       Game
+License:        BSD3
 License-file:   LICENSE
-Author:		Matthew Danish <mrd@debian.org>
-Maintainer:	mrd@debian.org
-Build-Depends:	base, OpenGL, OpenGLRaw, GLUT, random, array, haskell-quaternion, hcullide
+Author:         Matthew Danish <mrd@debian.org>
+Maintainer:     mrd@debian.org
+Build-Depends:  base >= 3 && < 5, OpenGL, OpenGLRaw, GLUT, random, array, haskell-quaternion, hcullide
 Build-type:     Simple
-Synopsis:	An OpenGL-based demo showing a 3D fish tank with simple boid-like behaviors
+Synopsis:       An OpenGL-based demo showing a 3D fish tank with simple boid-like behaviors
 Description:
-	A demo written using OpenGL that allows the user to view a
-	fish tank at various angles.  There are several kinds of fish
-	inside, showing various relationships based on the "Boids"
-	paper, including: flocking, predator/prey, mating, and
-	feeding.  The user may use the mouse to alter the viewing
-	angle, the mousewheel to zoom, or may right-click to access a
-	context menu which offers options such as "Add Food" or "Kill
-	a Boid".  There is also an option for anaglyphic 3D output
-	(using red-blue glasses).
+        A demo written using OpenGL that allows the user to view a
+        fish tank at various angles.  There are several kinds of fish
+        inside, showing various relationships based on the "Boids"
+        paper, including: flocking, predator/prey, mating, and
+        feeding.  The user may use the mouse to alter the viewing
+        angle, the mousewheel to zoom, or may right-click to access a
+        context menu which offers options such as "Add Food" or "Kill
+        a Boid".  There is also an option for anaglyphic 3D output
+        (using red-blue glasses).
 
 
-Executable:	fishtank
-Main-Is:	Main.hs
-Hs-Source-Dirs:	.
-Other-Modules:	
+Executable:     fishtank
+Main-Is:        Main.hs
+Hs-Source-Dirs: .
+Other-Modules:  
 C-Sources:      jpeg.c
 Extra-libraries:  jpeg
