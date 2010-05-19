@@ -12,7 +12,7 @@ import qualified Data.Quaternion as Q
 import Control.Monad
 import System.Random
 import Debug.Trace
-import GLDouble
+import GLDouble ((~==), dmax, epsilon)
 import Hier
 import JpegTexture
 import Collision
@@ -588,7 +588,7 @@ fineGrainedCollisions state flocks0 colindices events = do
 
           -- add a small random component to the deflection
           rv <- randomVector3d
-          let rv' = vecScale (magnitude deflect' / (4 * dmin (epsilon, magnitude rv))) rv
+          let rv' = vecScale (magnitude deflect' / (4 * dmax (epsilon, magnitude rv))) rv
           let deflect'' = deflect' `vecAdd` rv'
                           
           -- putStrLn ("b1="++show (i b1)++" b2="++show (i b2)++" r="++show r++" |dv_0|="++show(magnitude(pos b1_0 `vecSub` pos b2_0))++" |dv|="++show(magnitude dv)++" |deflect'|="++show(magnitude deflect'))

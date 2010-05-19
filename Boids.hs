@@ -18,7 +18,6 @@ import System.Exit ( exitWith, ExitCode(ExitSuccess) )
 import Graphics.UI.GLUT
 import Control.Monad
 import qualified Data.Quaternion as Q
-import GLDouble
 import Util
 
 -- Rule 1: steer towards average position

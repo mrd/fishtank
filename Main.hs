@@ -12,7 +12,6 @@ import Control.Monad
 import System.Random
 import Data.List ( foldl' )
 import qualified Data.Quaternion as Q
-import GLDouble
 import Boids
 import Util
 import Vivarium
